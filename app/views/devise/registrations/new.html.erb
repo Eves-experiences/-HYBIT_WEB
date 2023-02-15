@@ -1,0 +1,51 @@
+<div class= "container">
+  <div class="row justify-content-center">
+    <div class="col-sm-4">
+      <div class="form-new">
+        <h2>Sign up</h2>
+
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: :false }) do |f| %>
+          <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :nickname,
+                required: true,
+                autofocus: true %>
+    <%= f.input :first_name,
+                required: true,
+                autofocus: true %>
+    <%= f.input :last_name,
+                required: true,
+                autofocus: true %>
+    <%= f.input :age,
+                required: true,
+                autofocus: true %>
+    <%= f.input :email,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "email" }%>
+    <%= f.input :password,
+                required: true,
+                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                input_html: { autocomplete: "new-password" } %>
+    <%= f.input :password_confirmation,
+                required: true,
+                input_html: { autocomplete: "new-password" } %>
+    <%= f.input :photo, :label => "Profile picture", as: :file %>
+    <%= f.input :time_zone,
+                as: :select,
+                collection: ActiveSupport::TimeZone.all.map(&:name),
+                required: true,
+                label: "Please select your preferred timezone (to get our notifications at the right time)",
+                selected: 'Amsterdam' %>
+  </div>
+
+          <div class="form-actions">
+              <%= f.button :submit, "Sign up", class: "btn btn-primary" %>
+            </div>
+            <%= render "devise/shared/links" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

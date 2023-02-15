@@ -1,0 +1,285 @@
+<% @shared_habits_user = @friendship.user.habits.where(buddy_id: @friend.id) %>
+<% @shared_habits_friend = @friendship.friend.habits.where(buddy_id: @user.id) %>
+<% @public_habits_user = @friendship.user.habits.where(habit_public: true) %>
+<% @public_habits_friend = @friendship.friend.habits.where(habit_public: true) %>
+
+<div class="container">
+  <h5>HYBIT-HUB</h5>
+  <h2><strong><%= @friend.nickname %></strong> & <strong><%= @user.nickname%> </strong></h2>
+  <div class="follow-grid">
+    <div class="grid-item">
+      <div class="card-friendship-first">
+        <%= link_to "/users/#{@friend.id}" do %>
+          <% if @friend.photo.attached? %>
+            <%= cl_image_tag(@friend.photo.key, crop: :thumb, gravity: :face, class: "avatar-xlarge") %>
+          <% else %>
+            <%= image_tag "user_b.png", class: "avatar-xlarge" %>
+          <% end %>
+        <% end %>
+        <h3>🏅<strong><%= @friend.points%></strong>🏅</h3>
+      </div>
+
+      <% if @friend.points > @user.points %>
+        <div class="card-friendship-first">
+          <h4>🏆 🏆 🏆 🏆 🏆 🏆</h4>
+          <h4><strong> <%= @friend.nickname %> is in the lead!</strong></h4>
+          <h4>🏆 🏆 🏆 🏆 🏆 🏆</h4>
+        </div>
+      <% end %>
+
+      <% if @shared_habits_friend.empty? %>
+        <div class="card-friendship-empty">
+          <h6>currently no habits where <strong><%= @user.nickname %></strong> is your <em>accountabilibuddy</em></h6>
+        </div>
+      <% else %>
+          <div class="card-friendship-first">
+            <h5>Your habits with: <strong><%= @user.nickname %></strong></h5>
+          </div>
+        <% @shared_habits_friend.each do |habit|%>
+          <div class="card-friendship-empty">
+            <%= link_to "/habits/#{habit.id}" do %>
+              <% case habit.importance_level %>
+                <% when 1 %>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                <% when 2 %>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                <% when 3 %>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                <% when 4 %>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                <% when 5 %>
+                <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                <i class="fa-solid fa-circle" aria-hidden="true"></i>
+              <% end %>
+              <h3><strong><%= habit.name %></strong></h3>
+              <% if habit.streak_count.positive? %>
+                <h5>📈 <strong><%=habit.streak_count%> <%= habit.frequency_variable%></strong> streak<h5>
+              <% elsif habit.streak_count.negative?%>
+                <% if habit.streak_count < - 1 %>
+                  <h5>⚠️ not done <strong><%= habit.streak_count.abs%> <%= habit.frequency_variable%>s</strong> in a row </h5>
+                <% else %>
+                  <h5>⚠️ not done for <strong><%= habit.streak_count.abs%> <%= habit.frequency_variable%></strong></h5>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+
+
+
+      <% if @public_habits_friend.empty? %>
+        <div class="card-friendship">
+          <h6><em>You have no public habits to show</em>...</h6>
+        </div>
+      <% else %>
+        <div class="card-friendship-first">
+          <h5>Your <strong>public habits</strong></h5>
+        </div>
+        <% @public_habits_friend.each do |habit|%>
+          <div class="card-friendship">
+            <%= link_to "/habits/#{habit.id}" do %>
+              <% case habit.importance_level %>
+                <% when 1 %>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                <% when 2 %>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                <% when 3 %>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                <% when 4 %>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                <% when 5 %>
+                <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                <i class="fa-solid fa-circle" aria-hidden="true"></i>
+              <% end %>
+              <h4><strong><%= habit.name %></strong></h4>
+              <% if habit.streak_count.positive? %>
+                <h5>📈 <strong><%=habit.streak_count%> <%= habit.frequency_variable%></strong> streak<h5>
+              <% elsif habit.streak_count.negative?%>
+                <% if habit.streak_count < - 1 %>
+                  <h5>⚠️ not done <strong><%= habit.streak_count.abs%> <%= habit.frequency_variable%>s</strong> in a row </h5>
+                <% else %>
+                  <h5>⚠️ not done for <strong><%= habit.streak_count.abs%> <%= habit.frequency_variable%></strong></h5>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="grid-item">
+      <div class="card-friendship-first">
+        <%= link_to "/users/#{@user.id}" do %>
+          <% if @user.photo.attached? %>
+            <%= cl_image_tag(@user.photo.key, crop: :thumb, gravity: :face, class: "avatar-xlarge") %>
+          <% else %>
+            <%= image_tag "user_b.png", class: "avatar-xlarge" %>
+          <% end %>
+        <% end %>
+        <h3>🏅<strong><%= @user.points%></strong>🏅</h3>
+      </div>
+      <% if @user.points > @friend.points %>
+        <div class="card-friendship-first">
+          <h4>🏆 🏆 🏆 🏆 🏆 🏆</h4>
+          <h4><strong> <%= @user.nickname %> is in the lead!</strong></h4>
+          <h4>🏆 🏆 🏆 🏆 🏆 🏆</h4>
+        </div>
+      <% end %>
+
+      <% if @shared_habits_user.empty? %>
+        <div class="card-friendship-empty">
+          <h6>Has no habits with you as their <em>accountabilibuddy</em></h6>
+        </div>
+      <% else %>
+          <div class="card-friendship-first">
+            <h5><strong><%= @user.nickname %></strong>'s habits with <strong> you </strong></h5>
+          </div>
+        <% @shared_habits_user.each do |habit|%>
+          <div class="card-friendship-empty">
+            <%= link_to "#" do %>
+              <% case habit.importance_level %>
+                <% when 1 %>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                <% when 2 %>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                <% when 3 %>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                <% when 4 %>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                <% when 5 %>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+              <% end %>
+              <h4><strong><%= habit.name %></strong></h4>
+              <% if habit.streak_count.positive? %>
+                <h5>📈 <strong><%=habit.streak_count%> <%= habit.frequency_variable%></strong> streak<h5>
+              <% elsif habit.streak_count.negative?%>
+                <% if habit.streak_count < - 1 %>
+                  <h5>⚠️ not done <strong><%= habit.streak_count.abs%> <%= habit.frequency_variable%>s</strong> in a row </h5>
+                <% else %>
+                  <h5>⚠️ not done for <strong><%= habit.streak_count.abs%> <%= habit.frequency_variable%></strong></h5>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+
+      <% if @public_habits_user.empty? %>
+        <div class="card-friendship">
+          <h6><i><%= @user.nickname%> has no public habits to show</i>...</h6>
+        </div>
+      <% else %>
+          <div class="card-friendship-first">
+            <h5><%= @user.nickname%>'s <strong>public habits</strong></h5>
+          </div>
+        <% @public_habits_user.each do |habit|%>
+          <div class="card-friendship">
+            <%= link_to "#" do %>
+              <% case habit.importance_level %>
+                <% when 1 %>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                <% when 2 %>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                <% when 3 %>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                <% when 4 %>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                  <i class="fa-regular fa-circle" aria-hidden="true"></i>
+                <% when 5 %>
+                <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                <i class="fa-solid fa-circle" aria-hidden="true"></i>
+                <i class="fa-solid fa-circle" aria-hidden="true"></i>
+              <% end %>
+              <h4><strong><%= habit.name %></strong></h4>
+              <% if habit.streak_count.positive? %>
+                <h5>🔥 on a <strong><%=habit.streak_count%> <%= habit.frequency_variable%></strong> streak 🔥<h5>
+              <% elsif habit.streak_count.negative?%>
+                <% if habit.streak_count < - 1 %>
+                  <h5>⚠️ not done <strong><%= habit.streak_count.abs%> <%= habit.frequency_variable%>s</strong> in a row </h5>
+                <% else %>
+                  <h5>⚠️ not done for <strong><%= habit.streak_count.abs%> <%= habit.frequency_variable%></strong></h5>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

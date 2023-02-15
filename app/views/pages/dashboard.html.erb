@@ -1,0 +1,117 @@
+<div class="container">
+
+  <div class="header">
+    <h1>Hello,</h1>
+    <h1><strong><%= @current_user.nickname %></strong></h1>
+    <br>
+    <p><strong>Let's start building (new) habits</strong></p>
+    <p>See below your tasks for today <br> Are you on track?</p>
+    <p>Check them out, or add a new one! <i class="fa fa-rocket" id="homepage-icon"></i></p>
+  </div>
+
+  <div class="container-slider mt-4">
+    <h2><strong>Today</strong></h2>
+    <section class="container-slider-cards">
+      <% @habits_today.each do |habit| %>
+        <%= link_to "/habits/#{habit.id}", class: "card-habit-today" do %>
+          <h2><strong> <%= habit.name %> </strong></h2>
+          <div class="card-habit-streak">
+            <% if habit.streak_count.present? && habit.streak_count > 0 %>
+              <h6> Great work!</h6>
+              <h6> You're on a <%=habit.streak_count%> day streak 🔥<h6>
+            <% else %>
+              <h6> No streak.</h6>
+              <h6> Get back on track! 💪 </h6>
+            <% end %>
+          </div>
+            <% if habit.habitcount_day == 0 %>
+              <p><i class="fa fa-rocket"></i>    you hit your goal of <strong><%= habit.frequency_number %></strong> x per <strong><%= habit.frequency_variable %></strong>!</strong></p>
+            <% elsif habit.due_date.present? %>
+              <p><i class="fa fa-hourglass-end"></i>    <strong>still</strong> have to <strong>do it <%= habit.habitcount_day %> x</strong> before <strong><%= habit.due_date.strftime("%-d")%> <%= habit.due_date.strftime("%b '%y").upcase %></strong></p>
+            <% end %>
+        <% end %>
+      <% end %>
+    </section>
+  </div>
+
+  <div class="container-slider">
+    <h2><strong>This week</strong></h2>
+    <section class="container-slider-cards">
+      <% @habits_week.each do |habit| %>
+        <%= link_to "/habits/#{habit.id}", class: "card-habit" do %>
+          <h2><strong><%= habit.name %></strong></h2>
+          <div class="card-habit-streak">
+            <% if habit.streak_count.present? && habit.streak_count > 0 %>
+              <h6> Great work!</h6>
+              <h6> You're on a <%=habit.streak_count%> week streak 🔥<h6>
+            <% else %>
+              <h6> No streak.</h6>
+              <h6> Get back on track! 💪 </h6>
+            <% end %>
+          </div>
+          <% if habit.habitcount_week == 0 %>
+            <p><i class="fa fa-rocket"></i>    you hit your goal of <strong><%= habit.frequency_number %></strong> x per <strong><%= habit.frequency_variable %></strong>!</strong></p>
+          <% elsif habit.due_date.present? %>
+            <p><i class="fa fa-hourglass-end"></i>    <strong>still</strong> have to <strong>do it <%= habit.habitcount_week %> x </strong> before <strong><%= habit.due_date.strftime("%-d")%> <%= habit.due_date.strftime("%b '%y").upcase %></strong></p>
+          <% end %>
+        <% end %>
+      <% end %>
+    </section>
+  </div>
+
+  <div class="container-slider">
+    <h2><strong>This month</strong></h2>
+    <section class="container-slider-cards">
+      <% @habits_month.each do |habit| %>
+        <%= link_to "/habits/#{habit.id}", class: "card-habit" do %>
+          <h2><strong><%= habit.name %></strong></h2>
+          <div class="card-habit-streak">
+            <% if habit.streak_count.present? && habit.streak_count > 0 %>
+              <h6> Great work!</h6>
+              <h6> You're on a <%=habit.streak_count%> month streak 🔥<h6>
+            <% else %>
+              <h6> No streak.</h6>
+              <h6> Get back on track! 💪 </h6>
+            <% end %>
+          </div>
+          <% if habit.habitcount_month == 0 %>
+            <p><i class="fa fa-rocket"></i>    you hit your goal of <strong><%= habit.frequency_number %></strong> x per <strong><%= habit.frequency_variable %></strong>!</strong></p>
+          <% elsif habit.due_date.present? %>
+            <p><i class="fa fa-hourglass-end"></i>    <strong>still</strong> have to <strong>do it <%= habit.habitcount_week %> x </strong> before <strong><%= habit.due_date.strftime("%-d")%> <%= habit.due_date.strftime("%b '%y").upcase %></strong></p>
+          <% end %>
+        <% end %>
+      <% end %>
+    </section>
+  </div>
+
+  <% if @habitcount_year.present? %>
+  <div class="container-slider">
+    <h2><strong>This year</strong></h2>
+    <section class="container-slider-cards">
+      <% @habits_year.each do |habit| %>
+        <%= link_to "/habits/#{habit.id}", class: "card-habit" do %>
+          <h2><strong><%= habit.name %></strong></h2>
+          <div class="card-habit-streak">
+            <% if habit.streak_count.present? && habit.streak_count > 0 %>
+              <h6> Great work!</h6>
+              <h6> You're on a <%=habit.streak_count%> year streak 🔥<h6>
+            <% else %>
+              <h6> No streak.</h6>
+              <h6> Get back on track! 💪 </h6>
+            <% end %>
+          </div>
+          <% if habit.habitcount_year == 0 %>
+            <p><i class="fa fa-rocket"></i>    you hit your goal of <strong><%= habit.frequency_number %></strong> x per <strong><%= habit.frequency_variable %></strong>!</strong></p>
+          <% elsif habit.due_date.present? %>
+            <p><i class="fa fa-hourglass-end"></i>    <strong>still</strong> have to <strong>do it <%= habit.habitcount_week %> x </strong> before <strong><%= habit.due_date.strftime("%-d")%> <%= habit.due_date.strftime("%b '%y").upcase %></strong></p>
+          <% end %>
+        <% end %>
+      <% end %>
+    </section>
+  </div>
+  <% else %>
+    <h2><strong>This year</strong></h2>
+    <p><em>No habits tracking for this year</em><p>
+    <br>
+  <% end %>
+</div>

@@ -1,0 +1,64 @@
+// Overall container styling
+.container {
+  margin-bottom: 65px;
+
+  h1 {
+    text-align: center;
+  }
+}
+
+// Dashboard container styling
+.container {
+  margin-bottom: 65px;
+
+  .header {
+    margin-bottom: 30px;
+
+  }
+  h1 {
+    text-align: left;
+    font-size: 29px;
+  }
+
+  #homepage-icon {
+    color: $h_red;
+  }
+}
+
+// Styling for card sliders
+.container-slider {
+  height: 30%;
+  justify-content: flex-start;
+  background: $h_white;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.container-slider-cards {
+  display: flex;
+  gap: 12px;
+  max-width: 400px;
+  width: 100%;
+  padding-right: 15px;
+  scroll-snap-type: x mandatory;
+  overflow-x: scroll;
+  scroll-padding: 30px;
+}
+
+// for friendships/new below
+
+.container-slider-follow {
+  // justify-content: flex-start;
+  // background: $h_white;
+  // margin-top: 5px;
+  // margin-bottom: 20px;
+}
+
+.follow-grid {
+  display: flex;
+  gap: 12px;
+  width: 97%;
+  height: 100%;
+  // overflow-y: scroll;
+  // height: 100%;
+}

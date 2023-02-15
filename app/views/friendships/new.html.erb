@@ -1,0 +1,106 @@
+<div class="container">
+  <div class="container-slider">
+    <h5 id="friends">Your <strong>accountabilibuddies</strong></h5>
+    <section class="container-slider-cards">
+      <% @mutual_friends.each do |friend| %>
+        <% friendship_id = friend.friendships.where(friend_id: current_user.id).ids %>
+        <%= link_to "/friendships/#{friendship_id[0]}", class:"text-decoration-none" do %>
+          <div class="card-friend">
+            <% if friend.photo.attached? %>
+              <%= cl_image_tag(friend.photo.key, crop: :thumb, gravity: :face, class: "avatar-large") %>
+            <% else %>
+              <%= image_tag "user_b.png", class: "avatar" %>
+            <% end %>
+            <h5>🏅<%= friend.points%>🏅</h5>
+            <h3><%= friend.nickname %></h3>
+          </div>
+        <% end %>
+      <% end %>
+    </section>
+  </div>
+  <div class="container-slider">
+    <h5 id="friends"><i>Other HYBIT fans you haven't met <strong>yet</strong></i></h5>
+    <section class="container-slider-cards">
+      <% if @potential_friends.empty? %>
+        <div class="card-friend">
+          <p>No new Hybitters for you to follow.. (you already follow everyone on Hybit! YAY)</p>
+        </div>
+      <% else %>
+        <% @potential_friends.each do |stranger| %>
+            <div class="card-friend" id="card-stranger">
+              <%= link_to "/users/#{stranger.id}", class:"text-decoration-none" do %>
+                <% if stranger.photo.attached? %>
+                  <%= cl_image_tag(stranger.photo.key, crop: :thumb, gravity: :face, class: "avatar-large") %>
+                <% else %>
+                  <%= image_tag "user_b.png", class: "avatar-large" %>
+                <% end %>
+              <% end %>
+              <h5>🏅<%= stranger.points%>🏅</h5>
+              <h3><%= stranger.nickname %></h3>
+              <%= form_tag friendships_path, method: :post do %>
+                <%= hidden_field_tag :friend_id, stranger.id %>
+                <%= submit_tag "Start following now!", class: "btn btn-primary" %>
+              <% end %>
+            </div>
+        <% end %>
+      <% end %>
+    </section>
+  </div>
+  <h6 class="text-center">🎯 keep up with your habits with the HYBIT community 🎯</h6>
+  <div class="container-slider-follow">
+    <div class="follow-grid">
+      <div class="grid-item">
+        <h3><strong><i>follows</i></strong> you</h3>
+        <% if @user_that_follows_you.empty? %>
+          <div class="card-follow-left">
+            <h5>No pending followers at the moment...</h5>
+          </div>
+        <% else %>
+          <% @user_that_follows_you.each do |follower| %>
+            <div class="card-follows" id="card-follows">
+              <% friendship = Friendship.where(user_id: follower.id, friend_id: current_user.id) %>
+              <h6><strong><%= follower.nickname %></strong></h6>
+              <%= link_to "/users/#{follower.id}" do %>
+                <% if follower.photo.attached? %>
+                  <%= cl_image_tag(follower.photo.key, crop: :thumb, gravity: :face, class: "avatar-large") %>
+                <% else %>
+                  <%= image_tag "user_b.png", class: "avatar-large" %>
+                <% end %>
+              <% end %>
+              <h5>🏅<%= follower.points%>🏅</h5>
+              <%= form_tag friendship_path(friendship.ids), method: :patch do %>
+                <%= hidden_field_tag :user_id, follower.id%>
+                <%= hidden_field_tag :mutual, true %>
+                <%= submit_tag "follow back?", class: "btn btn-primary", id:"btn-follow" %>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="grid-item">
+        <h3 class="card-right">you <strong><i>follow</i></strong> </h3>
+        <% if @users_you_follow.empty? %>
+          <div class="card-follow-right">
+            <h5>Everyone followed you back, YAY!</h5>
+          </div>
+        <% else %>
+          <% @users_you_follow.each do |user| %>
+            <div class="card-follows" id="card-follow">
+              <% following = Friendship.where(user_id: current_user.id, friend_id: user.id) %>
+              <h6><strong><%= user.nickname %></strong></h6>
+              <%= link_to "/users/#{user.id}" do %>
+                <% if user.photo.attached? %>
+                  <%= cl_image_tag(user.photo.key, crop: :thumb, gravity: :face, class: "avatar-large") %>
+                <% else %>
+                  <%= image_tag "user_b.png", class: "avatar-large" %>
+                <% end %>
+              <% end %>
+              <h5>🏅score: <%= user.points%>🏅</h5>
+              <%= link_to "unfollow?", friendship_path(following.ids), class: "btn btn-secondary", data: {turbo_method: :delete, turbo_confirm: "sure?"} %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

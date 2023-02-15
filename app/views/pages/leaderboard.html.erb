@@ -1,0 +1,50 @@
+<div class="wholepage">
+  <div class="banner">
+    <h2><strong>Leaderboard</strong></h2>
+    <p>You are <strong># <%= @rank_all %></strong> of all users and <strong># <%= @rank_friends %></strong> of your friends</p>
+  </div>
+
+  <h2>Top 5 of all users</h2>
+  <ol>
+    <% @top5_all.each do |user| %>
+      <li >
+        <div class="one-user <%= user.id == @current_user.id ? "me" : "" %>">
+          <div class="user">
+            <% if user.photo.attached? %>
+              <%= cl_image_tag(user.photo.key, crop: :thumb, gravity: :face, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false) %>
+            <% else %>
+              <%= image_tag "user_leaderboard.png", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+            <% end %>
+            <% user_id = user.id %>
+            <%= link_to user.nickname, "/users/#{user_id}" %>
+          </div>
+          <div class=points>
+            <%=user.points %>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ol>
+
+  <h2>Top 5 of your friends</h2>
+  <ol>
+    <% @top5_friends.each do |user| %>
+      <li>
+        <div class="one-user <%= user.id == @current_user.id ? "me" : "" %>">
+          <div class="user">
+            <% if user.photo.attached? %>
+              <%= cl_image_tag(user.photo.key, crop: :thumb, gravity: :face, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false) %>
+            <% else %>
+              <%= image_tag "user_leaderboard.png", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+            <% end %>
+            <% user_id = user.id %>
+            <%= link_to user.nickname, "/users/#{user_id}" %>
+          </div>
+          <div class=points>
+            <%=user.points %>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ol>
+</div>

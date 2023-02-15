@@ -1,2 +1,13 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="intropage">
+  <div class="intropage_image">
+    <%= link_to new_user_session_path do %>
+      <%= image_tag("hybit_og_image.jpg", alt: "Hybit Logo") %>
+    <% end %>
+  </div>
+  <div class="banner">
+    <h2>Habit Builder For Hyper People</h2>
+    <p>Living with AD(h)D has many advantages —hyperfocus, creativity, spontaneity, anyone? But we're here to help you with one of the trickier bits: building new habits, and keeping them. Tell us which habit you want to start building, and we'll keep you on track! So you can focus on being awesome.</p>
+  </div>
+  <%= link_to "I'm new here", new_user_registration_path, class: "btn btn-secondary" %>
+  <%= link_to "Log in", new_user_session_path, class: "btn btn-primary" %>
+</div>

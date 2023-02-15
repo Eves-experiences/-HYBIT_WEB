@@ -1,0 +1,34 @@
+.container-user {
+  color: $h_textBlue;
+  background-color: $h_white;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content:flex-start;
+  align-items: center;
+  margin-bottom: 50px;
+
+  .banner {
+    width: 70vw;
+    color: $h_textBlue;
+    text-align: center;
+
+    h2 {
+      margin-bottom: 0px;
+    }
+  }
+
+  .user-ranking {
+    display: grid;
+    padding: 0px 15px 0px 15px;
+    grid-template-columns: 1fr 1fr;
+    text-align: center;
+    column-gap: 30px;
+  }
+
+  h2 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+}

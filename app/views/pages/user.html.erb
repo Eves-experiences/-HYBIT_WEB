@@ -1,0 +1,75 @@
+<%# <h1>Pages#user</h1>
+
+<h2>What to show here:</h2>
+<ul>
+<li> User picture </li>
+<li> On HYBIT since: <%= @user.created_at %>
+<%# <li> Friendship status with current_user; mutual, following, follower, stranger </li>
+<li> link to that friendship ^ </li>
+<li> Public habits </li>
+<li> public motivations for each habit</li>
+<li> Place on leaderboard</li>
+<li> shared followers maybe?</li>
+<li> button for follow request; but that probably wont work </li>
+</ul>  %>
+
+<div class="container-user">
+  <div class="banner">
+      <% if @user.photo.attached? %>
+              <%= cl_image_tag(@user.photo.key, crop: :thumb, gravity: :face, class: "avatar-xlarge")%>
+            <% else %>
+              <%= image_tag "user_b.png", class: "avatar-xlarge" %>
+            <% end %>
+      <p style="margin-top: 10px">You are viewing the profile of:</p>
+      <h2><%= @user.nickname %></h2>
+      <hr>
+  </div>
+  <div class="user-ranking">
+    <p><strong><%= @user.points %></strong> points earned</p><p><strong>#<%= @rank_all %></strong> position on the leaderboard</p>
+  </div>
+
+  <div class="container-slider" style="margin-left: 25px">
+
+    <h2><strong>Public habits</strong></h2>
+      <section class="container-slider-cards">
+        <% @habits_public.each do |habit| %>
+          <div class="card-habit">
+            <h2><%= habit.name %></h2>
+            <div class="card-habit-streak">
+            <% if habit.motivation_public == true %>
+              <h6> <%= habit.motivation %></h6>
+            <% else %>
+              <h6>Sorry, <%= @user.nickname %>'s motivation is private</h6>
+            <% end %>
+            </div>
+            <% if habit.frequency_number > 0 %>
+            <p>🔥 <%= habit.frequency_number %> <%= habit.frequency_variable %> streak!</p>
+            <% else %>
+            <p> No streak... </p>
+            <% end %>
+          </div>
+        <% end %>
+      </section>
+  </div>
+
+
+  <div class="container-slider" style="margin-left: 25px">
+    <h2><strong>Your mutual friends</strong></h2>
+    <section class="container-slider-cards">
+      <% @mutual_friends.each do |friend| %>
+        <% friendship_id = friend.friendships.where(friend_id: current_user.id).ids %>
+        <%= link_to "/friendships/#{friendship_id[0]}", class:"text-decoration-none" do %>
+          <div class="card-friend">
+            <% if friend.photo.attached? %>
+              <%= cl_image_tag(friend.photo.key, crop: :thumb, gravity: :face, class: "avatar") %>
+            <% else %>
+              <%= image_tag "user_b.png", class: "avatar" %>
+            <% end %>
+            <h5>🏅<%= friend.points%>🏅</h5>
+            <h5><%= friend.nickname %></h5>
+          </div>
+        <% end %>
+      <% end %>
+    </section>
+  </div>
+</div>

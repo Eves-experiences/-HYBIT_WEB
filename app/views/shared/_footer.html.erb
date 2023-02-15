@@ -1,0 +1,18 @@
+<div class="footer">
+<%# link to home %>
+  <%= link_to dashboard_path do %>
+    <i class="fa-solid fa-house"></i>
+  <% end %>
+<%# link to leaderboard %>
+    <%= link_to leaderboard_path do %>
+    <i class="fa-solid fa-trophy"></i>
+  <% end %>
+<%# link to habits show or index %>
+      <%= link_to new_habit_path do %>
+    <i class="fa-solid fa-circle-plus"></i>
+  <% end %>
+<%# link to friendships overview %>
+      <%= link_to new_friendship_path do %>
+    <i class="fa-solid fa-handshake"></i>
+  <% end %>
+</div>

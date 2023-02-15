@@ -1,0 +1,204 @@
+<div class="container">
+
+  <h5>Habit:</h5>
+  <h2><strong><%= @habit.name %></strong></h2>
+
+  <div class="card-show">
+
+    <% if @habit.category == "Productivity" %>
+      <%= image_tag "hybit-productivity.png" %>
+    <% elsif @habit.category == "Energy" %>
+      <%= image_tag "hybit-energy.png" %>
+    <% elsif @habit.category == "Relationships" %>
+      <%= image_tag "hybit-relationships.png" %>
+    <% elsif @habit.category == "Order" %>
+      <%= image_tag "hybit-order.png" %>
+    <% elsif @habit.category == "Purpose" %>
+      <%= image_tag "hybit-purpose.png" %>
+    <% elsif @habit.category == "Creativity" %>
+      <%= image_tag "hybit-creativity.png" %>
+    <% elsif @habit.category == "Recharging" %>
+      <%= image_tag "hybit-recharge.png" %>
+    <% else %>
+      <%= image_tag "hybit-check.png" %>
+    <% end %>
+
+    <div class="card-show-info">
+      <% if @habit.streak_count <= 0 %>
+        <h5> <strong>Currently no streak...</strong></h5><h6>Get back on track! 💪 </h6>
+      <% else %>
+        <h5>🔥 <strong><%= @habit.streak_count%> <%= @habit.frequency_variable %></strong> streak 🔥 <h5>
+      <% end %>
+      <h6>Importance level: <%= @habit.importance_level %></h6>
+    </div>
+
+  </div>
+
+  <% case @habit.importance_level %>
+    <% when 1 %>
+    <p class="field">
+      <i class="fa-solid fa-circle" aria-hidden="true"></i>
+      <i class="fa-regular fa-circle" aria-hidden="true"></i>
+      <i class="fa-regular fa-circle" aria-hidden="true"></i>
+      <i class="fa-regular fa-circle" aria-hidden="true"></i>
+      <i class="fa-regular fa-circle" aria-hidden="true"></i></p>
+    <% when 2 %>
+    <p class="field">
+      <i class="fa-solid fa-circle" aria-hidden="true"></i>
+      <i class="fa-solid fa-circle" aria-hidden="true"></i>
+      <i class="fa-regular fa-circle" aria-hidden="true"></i>
+      <i class="fa-regular fa-circle" aria-hidden="true"></i>
+      <i class="fa-regular fa-circle" aria-hidden="true"></i></p>
+    <% when 3 %>
+    <p class="field">
+      <i class="fa-solid fa-circle" aria-hidden="true"></i>
+      <i class="fa-solid fa-circle" aria-hidden="true"></i>
+      <i class="fa-solid fa-circle" aria-hidden="true"></i>
+      <i class="fa-regular fa-circle" aria-hidden="true"></i>
+      <i class="fa-regular fa-circle" aria-hidden="true"></i></p>
+    <% when 4 %>
+    <p class="field">
+      <i class="fa-solid fa-circle" aria-hidden="true"></i>
+      <i class="fa-solid fa-circle" aria-hidden="true"></i>
+      <i class="fa-solid fa-circle" aria-hidden="true"></i>
+      <i class="fa-solid fa-circle" aria-hidden="true"></i>
+      <i class="fa-regular fa-circle" aria-hidden="true"></i></p>
+    <% when 5 %>
+    <p class="field">
+    <i class="fa-solid fa-circle" aria-hidden="true"></i>
+    <i class="fa-solid fa-circle" aria-hidden="true"></i>
+    <i class="fa-solid fa-circle" aria-hidden="true"></i>
+    <i class="fa-solid fa-circle" aria-hidden="true"></i>
+    <i class="fa-solid fa-circle" aria-hidden="true"></i></p>
+  <% end %>
+  <p class="field"><i class="fa-regular fa-calendar"></i><strong>    Started </strong> on the <strong><%= local_user_time(@habit.start_date).strftime("%-d#{local_user_time(@habit.start_date).day.ordinal}")%></strong> of <strong><%= local_user_time(@habit.start_date).strftime("%B '%y").downcase %></strong></p>
+  <% if @habit.end_date? %>
+    <p class="field"><i class="fa-regular fa-calendar"></i><strong>    Tracking progress </strong> until <strong><%= local_user_time(@habit.end_date).strftime("%b %-d#{local_user_time(@habit.end_date).day.ordinal}")%></strong> of <strong><%= local_user_time(@habit.end_date).strftime("'%y") %></strong></p>
+  <% else %>
+    <p class="field"><i class="fa-regular fa-calendar"></i><strong>    Tracking progress </strong> until <strong>∞</strong> </p>
+  <% end %>
+
+  <% if @habit.frequency_number > 1 %>
+    <p class="field"><i class="fa-solid fa-repeat"></i>    do it <strong><%= @habit.frequency_number %> </strong> times per <strong><%= @habit.frequency_variable %></strong></p>
+  <% else %>
+    <p class="field"><i class="fa-solid fa-repeat"></i>    do it <strong><%= @habit.frequency_number %> </strong> time per <strong><%= @habit.frequency_variable %></strong></p>
+  <% end %>
+
+  <% if @habit.due_date.nil? %>
+    <p class="field"><i class="fa fa-hourglass-end"></i>    no <strong>due date </strong> is <strong></strong> set</p>
+  <% elsif Time.now < @habit.due_date %>
+    <% case @habit.timeframe %>
+    <% when "day" %>
+      <p class="field"><i class="fa-regular fa-bell"></i>    do it before <strong>midnight</strong> </p>
+    <% when "morning" %>
+      <p class="field"><i class="fa-regular fa-bell"></i>    do it before <strong>11:00</strong> </p>
+    <% when "afternoon" %>
+      <p class="field"><i class="fa-regular fa-bell"></i>    do it before <strong>17:00</strong> </p>
+    <% when "evening" %>
+      <p class="field"><i class="fa-regular fa-bell"></i>    do it before <strong>23:59</strong> </p>
+    <% end %>
+  <% else %>
+    <% case @habit.timeframe %>
+    <% when "day" %>
+      <p class="field"><i class="fa fa-exclamation-triangle"></i>    missed the deadline...</p>
+    <% when "morning" %>
+      <p class="field"><i class="fa fa-exclamation-triangle"></i>    missed the deadline...</p>
+    <% when "afternoon" %>
+      <p class="field"><i class="fa fa-exclamation-triangle"></i>    missed the deadline...</p>
+    <% when "evening" %>
+      <p class="field"><i class="fa fa-exclamation-triangle"></i>    missed the deadline...</p>
+    <% end %>
+  <% end %>
+
+  <% if @habit.done? %>
+    <% if @habit.save_click_time? %>
+      <% if local_user_time(@habit.save_click_time).day == Date.today.day && local_user_time(@habit.save_click_time).month == Date.today.month %>
+        <p class="field"><i class="fa-solid fa-check-circle"></i>    done <strong>today</strong> at <strong><%= local_user_time(@habit.save_click_time).strftime("%H:%M")%></strong> </p>
+      <% elsif local_user_time(@habit.save_click_time).day == Date.yesterday.day && local_user_time(@habit.save_click_time).month == Date.yesterday.month %>
+        <p class="field"><i class="fa-solid fa-check-circle"></i>    done <strong>yesterday</strong> at <strong><%= local_user_time(@habit.save_click_time).strftime("%H:%M")%></strong> </p>
+      <% else %>
+        <p class="field"><i class="fa-solid fa-check-circle"></i>    done at <strong><%= local_user_time(@habit.save_click_time).strftime("%H:%M")%></strong> on the <strong><%= local_user_time(@habit.save_click_time).strftime("%-d#{local_user_time(@habit.save_click_time).day.ordinal}")%></strong> of <strong><%= local_user_time(@habit.save_click_time).strftime("%B").downcase %></strong> </p>
+      <% end %>
+    <% else %>
+      <p class="field"><i class="fa-solid fa-check-circle"></i>    done in time! </strong></p>
+    <% end %>
+  <% else %>
+    <% case @habit.timeframe %>
+      <% when "day" %>
+        <p class="field"><i class="fa-regular fa-check-circle"></i>    during the <strong>day</strong> before <strong>midnight</strong> </p>
+      <% when "morning" %>
+        <p class="field"><i class="fa-regular fa-check-circle"></i>    in the <strong>morning</strong> between <strong> 06:00 </strong> and <strong>11:00</strong> </p>
+      <% when "afternoon" %>
+        <p class="field"><i class="fa-regular fa-check-circle"></i>    in the <strong>afternoon</strong> between <strong> 11:00 </strong> and <strong>17:00</strong> </p>
+      <% when "evening" %>
+        <p class="field"><i class="fa-regular fa-check-circle"></i>    in the <strong>evening</strong> between <strong> 17:00 </strong> and <strong>01:00</strong> </p>
+      <% end %>
+  <% end %>
+
+  <% if @habit.due_date? %>
+    <% case @habit.frequency_variable %>
+      <% when "day" %>
+        <% if @habit.habitcount_day == 0 %>
+          <p class="field"><i class="fa fa-rocket"></i>    you hit your goal of <strong><%= @habit.frequency_number %></strong> x per <strong><%= @habit.frequency_variable %></strong>!</strong></p>
+        <% else %>
+          <p class="field"><i class="fa fa-hourglass-end"></i>    <strong>still</strong> have to <strong>do it <%= @habit.habitcount_day %> x</strong> before <strong><%= local_user_time(@habit.due_date).strftime("%-d")%> <%= local_user_time(@habit.due_date).strftime("%b '%y").upcase %></strong></p>
+        <% end %>
+      <% when "week" %>
+        <% if @habit.habitcount_week == 0 %>
+          <p class="field"><i class="fa fa-rocket"></i>    you hit your goal of <strong><%= @habit.frequency_number %></strong> x per <strong><%= @habit.frequency_variable %></strong>!</strong></p>
+        <% else %>
+        <p class="field"><i class="fa fa-hourglass-end"></i>    <strong>still</strong> have to <strong>do it <%= @habit.habitcount_week %> x </strong> before <strong><%= local_user_time(@habit.due_date).strftime("%-d")%> <%= local_user_time(@habit.due_date).strftime("%b '%y").upcase %></strong></p>
+        <% end %>
+      <% when "month" %>
+        <% if @habit.habitcount_month == 0 %>
+          <p class="field"><i class="fa fa-rocket"></i>    <strong>goal met</strong>: you did it <strong><%= @habit.frequency_number %></strong> x this <strong><%= @habit.frequency_variable %></strong>!</strong></p>
+        <% else %>
+          <p class="field"><i class="fa fa-hourglass-end"></i>    <strong>still</strong> have to <strong>do it <%= @habit.habitcount_month %> x </strong> before <strong><%= local_user_time(@habit.due_date).strftime("%-d")%> <%= local_user_time(@habit.due_date).strftime("%b '%y").upcase %></strong></p>
+        <% end %>
+      <% when "year" %>
+        <% if @habit.habitcount_year == 0 %>
+          <p class="field"><i class="fa fa-rocket"></i>    you hit your goal of <strong><%= @habit.frequency_number %></strong> x per <strong><%= @habit.frequency_variable %></strong>!</strong></p>
+        <% else %>
+          <p class="field"><i class="fa fa-hourglass-end"></i>    <strong>still</strong> have to <strong>do it <%= @habit.habitcount_year %> x </strong> before <strong><%= local_user_time(@habit.due_date).strftime("%-d")%> <%= local_user_time(@habit.due_date).strftime("%b '%y").upcase %></strong></p>
+        <% end %>
+      <% end %>
+  <% else %>
+    <p class="field"><i class="fa fa-hourglass-end"></i>    <strong></strong> not set</p>
+  <% end %>
+
+
+
+
+
+  <div class="btn btn-primary <%= @habit.done == true ? "disabled" : "" %>" style="box-shadow: none">
+    <%= form_tag check_as_done_habit_path(@habit), method: :put do %>
+      <%= submit_tag @habit.done == true ? 'Already done' : 'Did it!', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+
+<hr>
+
+  <div class="card-friendship-habit">
+    <h6><i><strong>Remember why?</strong></i></h6>
+    <h6><%= @habit.motivation %> </h6>
+  </div>
+
+  <% if @habit.buddy.present? %>
+    <div class="card-friendship">
+      <h4>Your accountabilibuddy: <strong><%= @buddy.nickname %></strong></h4>
+      <%= link_to "/users/#{@buddy.id}" do %>
+        <% if @buddy.photo.attached? %>
+          <%= cl_image_tag(@buddy.photo.key, crop: :thumb, gravity: :face, class: "avatar-large") %>
+        <% else %>
+          <%= image_tag "user_b.png", class: "avatar" %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+<hr>
+  <div class="form-edit" style="box-shadow: none">
+    <%= link_to "Edit", edit_habit_path, class: "btn btn-secondary" %>
+    <%= link_to "Delete", habit_path(@habit), class: "btn btn-secondary", data: {turbo_method: :delete, turbo_confirm: "sure?"} %>
+    <%# <%= link_to "Back", dashboard_path, class:"btn btn-secondary" %>
+  </div>
+</div>

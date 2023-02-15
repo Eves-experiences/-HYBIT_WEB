@@ -10,3 +10,10 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+@import "pages/leaderboard";
+@import "pages/user";
+
+
+$custom-colors: (
+  "simpleform": #00617f
+);

@@ -1,1 +1,51 @@
-// Specific CSS for your home-page
+.intropage {
+  background-color: $h_red;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow-x: scroll;
+
+  .banner {
+    width: 70vw;
+    color: $h_white;
+    text-align: center;
+  }
+
+  .btn {
+    width: 70vw;
+    max-width: 25rem;
+    margin-top: 1rem;
+  }
+
+  .btn-primary {
+    border: solid 1px $h_white;
+  }
+
+  .btn-primary:hover {
+    background-blend-mode: darken;
+  }
+
+  .btn-secondary:hover {
+    background-color: rgb(228, 228, 228);
+  }
+
+  }
+
+  .intropage_image {
+  width: 100vw;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    max-width: 25rem;
+    object-fit: contain;
+    height: auto;
+  }
+
+  }

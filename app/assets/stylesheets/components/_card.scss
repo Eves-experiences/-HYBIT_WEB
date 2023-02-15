@@ -1,0 +1,306 @@
+.card {
+  border: none;
+}
+
+.card-habit {
+  display: flex;
+  flex: 0 0 75%;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  background: $h_lightBlue;
+  scroll-snap-align: start;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  color: $h_textBlue;
+}
+
+.card-habit-today {
+  display: flex;
+  flex: 0 0 75%;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  background: $h_red;
+  scroll-snap-align: start;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  color: $h_white;
+}
+
+.card-level {
+  display: flex;
+  flex: 0 0 55%;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  background: $h_lightBlue;
+  scroll-snap-align: start;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  color: $h_textBlue;
+  h4 {
+    margin-bottom: 10px;
+    text-decoration: underline;
+  }
+  ul {
+    padding: 0;
+  }
+}
+
+.card-show {
+  overflow: hidden;
+  height: 110px;
+  background: $h_lightBlue;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  margin-bottom: 8px;
+
+  img {
+    height: 100%;
+    width: 120px;
+    object-fit: cover;
+  }
+}
+
+.card-friendship-first {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-block-size: 100%;
+  background: $h_white;
+  text-decoration: none;
+  color: $h_gold;
+  img {
+    // box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.2);
+    // border: $h_gold 4px solid;
+    // margin-bottom: 10px;
+    // margin-top: 10px;
+  }
+}
+
+.card-friendship {
+  display: flex;
+  flex: 0 0 75%;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  // scroll-snap-align: start;
+  box-shadow: 0 5px 7px rgba(0, 0, 0, 0.1);
+  color: $h_textBlue;
+  overflow: hidden;
+  background: $h_lightBlue;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+
+  a {
+    text-decoration: none;
+    color: $h_textBlue;
+  }
+
+  i {
+    color: $h_red;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
+}
+
+.card-friendship-first h5 {
+  margin-top: 20px;
+}
+
+.card-friendship-empty {
+  display: flex;
+  flex: 0 0 75%;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  border-radius: 12px;
+  // scroll-snap-align: start;
+  box-shadow: 0 5px 7px rgba(0, 0, 0, 0.1);
+  color: $h_white;
+  overflow: hidden;
+  background: $h_darkBlue;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+
+  a {
+    text-decoration: none;
+    color: $h_white;
+  }
+
+  i {
+    color: $h_textBlue;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
+  em {
+    color: $h_textBlue;
+    font-weight: bolder;
+  }
+}
+
+.card-friendship-habit {
+  display: flex;
+  flex: 0 0 75%;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  margin-top: 20px;
+  border-radius: 12px;
+  scroll-snap-align: start;
+  box-shadow: 0 5px 7px rgba(0, 0, 0, 0.1);
+  opacity: 0.8;
+  text-decoration: none;
+  color: $h_white;
+  overflow: hidden;
+  background: $h_gold;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+}
+
+// .card-habit-show h2 {
+//   font-size: 16px;
+//   font-weight: bold;
+//   margin: 0;
+// }
+
+// .card-show p {
+//   margin-bottom: 8;
+//   margin-top: 8px;
+// }
+
+.card-show .card-show-info {
+  padding: 16px;
+}
+
+.field {
+  background: $h_lightBlue;
+  display: inline-block;
+  width: auto;
+  min-width: 30%;
+  max-width: 100%;
+  color: $h_textBlue;
+  // text-indent: 7px;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  margin-bottom: 5px;
+  border-radius: 10px;
+}
+
+.field-card {
+
+}
+
+
+#friends {
+  color: $h_red;
+}
+
+.card-friend {
+  display: flex;
+  flex: 0 0 75%;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 8px;
+  margin-bottom: 8px;
+  border-radius: 12px;
+  background: $h_darkBlue;
+  scroll-snap-align: start;
+  box-shadow: 0 5px 7px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  color: $h_textBlue;
+
+  img {
+    height: 100%;
+    width: 120px;
+    padding-bottom: 8px;
+    object-fit: cover;
+  }
+}
+
+
+.card-follows {
+  display: block;
+  max-block-size: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  background: $h_lightBlue;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  color: $h_textBlue;
+  text-align: center;
+
+  img {
+    margin-bottom: 10px;
+  }
+
+}
+
+#card-stranger {
+  background: $h_lightBlue;
+}
+
+#card-follows {
+  color: $h_red;
+}
+
+#card-follow {
+  background: $h_darkBlue;
+}
+
+.grid-item {
+  display: block;
+  flex-direction: column;
+  width: 50%;
+}
+
+.card-right {
+  text-align: right;
+  margin-right: 8px;
+}
+
+.card-follow-right {
+  text-align: right;
+  margin-right: 8px;
+  color: $h_gold;
+}
+
+.card-follow-left {
+  text-align: left;
+  margin-left: 8px;
+  color: $h_red;
+}

@@ -1,0 +1,172 @@
+<div class= "container">
+  <div class="row justify-content-center">
+    <div class="col-sm-4">
+      <div class="form-new">
+        <h2>Edit your habit</h2>
+
+        <%= simple_form_for(@habit) do |f| %>
+          <div class="form-inputs">
+            <%= f.input :category,
+                        label: "Select a habit category",
+                        required: false,
+                        autofocus: true,
+                        value: @habit.category,
+                        collection: ['Energy', 'Productivity', 'Relationships', 'Recharging', 'Order', 'Purpose', 'Creativity'] %>
+            <%= f.input :name,
+                        label: "Habit name",
+                        required: true,
+                        value: @habit.name,
+                        autofocus: true %>
+            <%= f.input :habit_public,
+                        label: "Keep habit public?",
+                        collection: [['Sure!', true], ['Set to private', false]],
+                        as: :radio_buttons,
+                        value: @habit.habit_public,
+                        input_html: { value: @habit.habit_public },
+                        as: :radio_buttons,
+                        required: false,
+                        autofocus: true %>
+            <%= f.input :end_date,
+                        label: "Change till when habit is tracked?",
+                        required: false,
+                        as: :date,
+                        include_blank: true,
+                        value: @habit.end_date,
+                        autofocus: true %>
+            <%= f.input :frequency_number,
+                        label: "Times",
+                        collection: [['1 time', 1], ['2 times', 2], ['3 times', 3], ['4 times', 4], ['5 times', 5], ['6 times', 6], ['7 times', 7]],
+                        required: true,
+                        value: @habit.frequency_number,
+                        autofocus: true %>
+            <%= f.input :frequency_variable,
+                        label: "Per",
+                        required: true,
+                        value: @habit.frequency_variable,
+                        collection: ['day', 'week', 'month', 'year'],
+                        autofocus: true %>
+            <%= f.input :timeframe,
+                        label: "When do you want to schedule it?",
+                        required: false,
+                        collection: [['in the morning (from 06 to 11)', 'morning'], ['in the afternoon (between 11 and 17', 'afternoon'], ['in the evening (from 17 to 01)', 'evening'], ['during the day (from 6 to midnight)', 'day']],
+                        include_blank: false,
+                        value: @habit.timeframe,
+                        autofocus: true %>
+            <%= f.input :motivation,
+                        label: "Change your motivation?",
+                        as: :text,
+                        required: false,
+                        value: @habit.motivation,
+                        autofocus: true %>
+            <%= f.input :motivation_public,
+                        label: "Keep motivation public?",
+                        collection: [['Sure!', true], ['Set to private', false]],
+                        as: :radio_buttons,
+                        value: @habit.motivation_public,
+                        input_html: { value: @habit.motivation_public },
+                        required: false,
+                        autofocus: true %>
+            <%= f.input :buddy_id,
+                        label: "Change buddy?",
+                        collection: @mutual_friends,
+                        as: :select,
+                        value: @habit.buddy_id,
+                        label_method: :nickname,
+                        value_method: :id,
+                        required: false,
+                        autofocus: true %>
+  <hr>
+  <div class="container-slider">
+    <section class="container-slider-cards">
+      <div class="card-level">
+        <h4> Level 1 </h4>
+        <div class="card-habit-streak">
+          <ul>
+            <p>☑️ Tracker</p>
+            <p>🔔 Reminders</p>
+          </ul>
+        </div>
+      </div>
+      <div class="card-level">
+        <h4> Level 2 </h4>
+        <div class="card-habit-streak">
+          <ul>
+            <p>☑️ Tracker</p>
+            <p>🔔 Reminders</p>
+            <p>⬇️ Loose points</p>
+          </ul>
+        </div>
+      </div>
+      <div class="card-level">
+        <h4> Level 3 </h4>
+        <div class="card-habit-streak">
+          <ul>
+            <p>☑️ Tracker</p>
+            <p>🔔 Reminders</p>
+            <p>⬇️ Loose points</p>
+            <p>📢 Notify buddy</p>
+          </ul>
+        </div>
+      </div>
+            <div class="card-level">
+        <h4> Level 4 </h4>
+        <div class="card-habit-streak">
+          <ul>
+            <p>☑️ Tracker</p>
+            <p>🔔 Reminders</p>
+            <p>⬇️ Loose points</p>
+            <p>📢 Notify buddy</p>
+            <p>😳 Public shame</p>
+          </ul>
+        </div>
+      </div>
+            <div class="card-level">
+        <h4> Level 5 </h4>
+        <div class="card-habit-streak">
+          <ul>
+            <p>☑️ Tracker</p>
+            <p>🔔 Reminders</p>
+            <p>⬇️ Loose points</p>
+            <p>📢 Notify buddy</p>
+            <p>😳 Public shame</p>
+            <p>💰 Lose money</p>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+            <%= f.input :importance_level,
+                        label: "Change Level of Importance?",
+                        as: :radio_buttons,
+                        collection:  [['Level 1', 1], ['Level 2', 2], ['Level 3', 3], ['Level 4', 4], ['Level 5', 5]],
+                        required: true,
+                        autofocus: true %>
+            <hr>
+    <%= f.input :contact_details,
+                label: "Who do we send messages?",
+                placeholder: "eg. your buddy's phonenumber",
+                required: false,
+                value: @habit.contact_details,
+                autofocus: true %>
+    <%= f.input :public_shame,
+                label: "Which social media account should we use?",
+                placeholder: "eg. facebook or twitter...",
+                required: false,
+                value: @habit.public_shame,
+                autofocus: true %>
+    <%= f.input :bank_connection,
+                label: "Where would you not like to see your money go?",
+                placeholder: "eg. Kim Kardashian's bank account",
+                required: false,
+                value: @habit.bank_connection,
+                autofocus: true %>
+            <hr>
+            <div class="form-actions">
+              <%= f.button :submit, "Edit habit", class: "btn btn-primary" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
