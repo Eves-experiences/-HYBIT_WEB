@@ -74,7 +74,7 @@ class Habit < ApplicationRecord
   end
 
   def contact_details_present
-    errors.add(:contact_details, "We need this in order to notify your buddy of your lack of progress") unless contact_details.present?
+    errors.add(:contact_details, "- We need this in order to notify your buddy of your lack of progress") unless contact_details.present?
   end
 
   def public_shame_present

@@ -75,7 +75,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_15_175406) do
     t.bigint "buddy_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name", default: "My New Habit"
+    t.string "name"
     t.boolean "habit_public", default: true
     t.text "motivation"
     t.boolean "motivation_public", default: true
@@ -86,9 +86,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_15_175406) do
     t.integer "frequency_number", default: 1
     t.string "timeframe", default: "day"
     t.integer "importance_level", default: 1
-    t.string "contact_details", default: "Your mum's phonenumber"
-    t.string "public_shame", default: "Your Social Network of Choice"
-    t.string "bank_connection", default: "Kim K's bankaccount"
+    t.string "contact_details"
+    t.string "public_shame"
+    t.string "bank_connection"
     t.integer "streak_count", default: 0
     t.datetime "save_click_time"
     t.boolean "done", default: false

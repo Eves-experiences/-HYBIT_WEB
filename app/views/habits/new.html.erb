@@ -30,7 +30,7 @@
                         as: :date,
                         discard_year: true,
                         autofocus: true %>
-            <%# <%= f.input :end_date,
+            <%= f.input :end_date,
                         label: "Track this habit until?",
                         required: false,
                         as: :date,
@@ -66,13 +66,6 @@
                         as: :radio_buttons,
                         input_html: { selected: 'Sure!' },
                         autofocus: true %>
-            <%# <%= f.input :buddy_id,
-                        label: "Share your habit with a buddy?",
-                        collection: @mutual_friends, as: :radio_buttons,
-                        label_method: :nickname,
-                        value_method: :id,
-                        input_html: { checked: nil },
-                        required: false %>
   <hr>
   <div class="container-slider">
     <section class="container-slider-cards">
@@ -143,8 +136,8 @@
   <hr>
 
     <%= f.input :contact_details,
-                label: "Who do we send messages?",
-                placeholder: "eg. your buddy's phonenumber",
+                label: "Who should we text when you fail?",
+                placeholder: "eg. your mom's phonenumber",
                 required: false,
                 autofocus: true %>
     <%= f.input :public_shame,

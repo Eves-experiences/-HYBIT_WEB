@@ -1,6 +1,6 @@
 class AddColumnsToHabits < ActiveRecord::Migration[7.0]
   def change
-    add_column :habits, :name, :string, default: "My New Habit"
+    add_column :habits, :name, :string
     add_column :habits, :habit_public, :boolean, default: true
     add_column :habits, :motivation, :text
     add_column :habits, :motivation_public, :boolean, default: true
